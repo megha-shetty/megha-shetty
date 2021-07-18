@@ -55,7 +55,7 @@ public class PredictionApp {
         }).collect(Collectors.toList());
 
         PredictionService predictionService = new MBTAPredictionServiceImpl();
-        Map<String, List<PredictionResult>> result = predictionService.getTopNPredictionForRoutesGroupedByRoute(limitN, routes);
+        Map<String, List<PredictionResult>> result = predictionService.getTopNPredictionForRoutesGroupedByRoute(limitN,routes,stop);
 
     }
 

@@ -18,7 +18,7 @@ public interface PredictionService {
      * @return {@link PredictionInfoCollection}
      * @throws SystemException,BusinessException
      */
-    public Map<String, List<PredictionResult>> getTopNPredictionForRoutesGroupedByRoute(int topN, List<String> routes) throws SystemException, BusinessException;
+    public Map<String, List<PredictionResult>> getTopNPredictionForRoutesGroupedByRoute(int topN, List<String> routes,String stop) throws SystemException, BusinessException;
 
     /**
      * Returns Prediction data for the provided routes
@@ -27,5 +27,5 @@ public interface PredictionService {
      * @return {@link PredictionInfoCollection}
      * @throws SystemException,BusinessException
      */
-    public PredictionInfoCollection getPredictionsForRoutes(List<String> routes) throws SystemException, BusinessException;
+    public PredictionInfoCollection getPredictionsForRoutes(List<String> routes,String stop) throws SystemException, BusinessException;
 }

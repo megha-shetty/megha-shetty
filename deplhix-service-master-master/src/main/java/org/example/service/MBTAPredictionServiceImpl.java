@@ -40,11 +40,11 @@ public class MBTAPredictionServiceImpl implements PredictionService {
      * @return {@link Map<String, Set<PredictionResult>>}
      * @throws SystemException,BusinessException
      */
-    public Map<String, List<PredictionResult>> getTopNPredictionForRoutesGroupedByRoute(int topN, List<String> routes) throws SystemException, BusinessException {
+    public Map<String, List<PredictionResult>> getTopNPredictionForRoutesGroupedByRoute(int topN, List<String> routes, String stop) throws SystemException, BusinessException {
 
         log.info("Top " + topN + " results to predict");
 
-        PredictionInfoCollection predictionInfoCollection = getPredictionsForRoutes(routes);
+        PredictionInfoCollection predictionInfoCollection = getPredictionsForRoutes(routes,stop);
 
         Timestamp currentTime = predictionInfoCollection.getCurrentTime();
 
@@ -81,7 +81,7 @@ public class MBTAPredictionServiceImpl implements PredictionService {
      * @throws SystemException,BusinessException
      */
     @Override
-    public PredictionInfoCollection getPredictionsForRoutes(List<String> routes) throws SystemException, BusinessException {
+    public PredictionInfoCollection getPredictionsForRoutes(List<String> routes,String stop) throws SystemException, BusinessException {
 
         log.info("Routes to predict for are : " + routes);
         if (routes.isEmpty()) {
@@ -91,7 +91,7 @@ public class MBTAPredictionServiceImpl implements PredictionService {
 
         String concatenatedRouteInfo = routes.stream().collect(Collectors.joining(","));
         ObjectMapper objectMapper = new ObjectMapper();
-        String predictioninfo = CommonUtils.getAPIResult(MessageFormat.format(FILTERED_PREDICTION_URL, "route", concatenatedRouteInfo));
+        String predictioninfo = CommonUtils.getAPIResult(MessageFormat.format(FILTERED_PREDICTION_URL, "route", concatenatedRouteInfo,stop));
         PredictionInfoCollection allPredictionData;
 
         try {
